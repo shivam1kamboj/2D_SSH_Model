@@ -73,4 +73,3 @@ for i in range(4):
     plt.legend(loc='best')
     Real_E_edge = np.zeros(4)
 plt.savefig('10x20_E[Re]_first_4_left.pdf')
-
