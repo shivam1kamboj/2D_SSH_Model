@@ -12,17 +12,19 @@ Eigenvalues = np.array([(np.linalg.eigvals(Hamiltonian_2DSSH(t, J, J2, m, n, w=1
 Real_energy = np.sort(Eigenvalues.real)
 Imaginary_energy = np.sort(Eigenvalues.imag)
 
-fig = plt.figure(figsize=(10, 5))
+plt.rcParams.update({'font.size': 16})
+
+fig = plt.figure(figsize=(18, 8))
 plt.subplot(1, 2, 1)
 plt.xlabel('Intercell coupling(J/t)')
 plt.ylabel('Re(E) [arb. units]')
-plt.title('J2=0.1 i.e. 10% vertical coupling strength,t=1')
+# plt.title('J2=0.1 i.e. 10% vertical coupling strength,t=1')
 plt.plot(j0, Real_energy)
 
 plt.subplot(1, 2, 2)
 plt.xlabel('Intercell coupling(J/t)')
 plt.ylabel('Im(E) [arb. units]')
-plt.title('J2=0.1 i.e. 10% vertical coupling strength,t=1')
+# plt.title('J2=0.1 i.e. 10% vertical coupling strength,t=1')
 plt.plot(j0, Imaginary_energy)
 
 plt.savefig('2D_SSH_10x10.pdf')
@@ -33,17 +35,17 @@ Eigenvalues = np.array([(np.linalg.eigvals(Hamiltonian_2DSSH(t, J, J2, m, n, w=1
 Real_energy = np.sort(Eigenvalues.real)
 Imaginary_energy = np.sort(Eigenvalues.imag)
 
-fig2 = plt.figure(figsize=(10, 5))
+fig2 = plt.figure(figsize=(15, 7))
 plt.subplot(1, 2, 1)
 plt.xlabel('Intercell coupling(J/t)')
 plt.ylabel('Re(E) [arb. units]')
-plt.title('J2=0.01 i.e. 1% vertical coupling strength,t=1')
+# plt.title('J2=0.01 i.e. 1% vertical coupling strength,t=1')
 plt.plot(j0, Real_energy)
 
 plt.subplot(1, 2, 2)
 plt.xlabel('Intercell coupling(J/t)')
 plt.ylabel('Im(E) [arb. units]')
-plt.title('J2=0.01 i.e. 1% vertical coupling strength,t=1')
+# plt.title('J2=0.01 i.e. 1% vertical coupling strength,t=1')
 plt.plot(j0, Imaginary_energy)
 
 plt.savefig('2D_SSH_10x10_1%_vertical.pdf')

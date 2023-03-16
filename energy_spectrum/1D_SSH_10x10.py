@@ -12,7 +12,7 @@ Eigenvalues = np.array([(np.linalg.eigvals(Hamiltonian_2DSSH(t, J, J2, m, n, w=1
 Real_energy = np.sort(Eigenvalues.real)
 Imaginary_energy = np.sort(Eigenvalues.imag)
 
-fig = plt.figure(figsize=(10, 5))
+fig = plt.figure(figsize=(12, 5))
 plt.subplot(1, 2, 1)
 plt.xlabel('Intercell coupling(J/t)')
 plt.ylabel('Re(E) [arb. units]')
