@@ -12,14 +12,14 @@ J2, J = 0.1, 0.2
 HH = Hamiltonian_2DSSH(t, J, J2, m, n, w, a, b, l)
 EI, VI = np.linalg.eig(HH)
 
-igens = []   # igens are indices of Eigen values with imaginary part >=0.09
+igens = []  # igens are indices of Eigen values with imaginary part >=0.09
 
-Nigens = []   # Nigens are indices of Eigen values with imaginary part <=0.09
+Nigens = []  # Nigens are indices of Eigen values with imaginary part <=0.09
 
 for i in range(len(EI)):
-    if EI[i].imag>=0.09:
+    if EI[i].imag >= 0.09:
         igens.append(i)
-    elif EI[i].imag<=-0.09:
+    elif EI[i].imag <= -0.09:
         Nigens.append(i)
 Vec = VI[:, igens]
 NVec = VI[:, Nigens]
@@ -28,36 +28,53 @@ NVec = VI[:, Nigens]
 
 plt.figure()
 for i, vector in enumerate(Vec.T[:4]):
-    plt.subplot(2, 2, i + 1)
-    plt.imshow((abs(vector).reshape(m, 2 * m)) ** 2)
-
-plt.savefig('10x20_left_edge.pdf')
+    ax = plt.subplot(3, 2, i + 1)
+    im = ax.imshow((abs(vector).reshape(m, 2 * m)) ** 2)
+    plt.colorbar(im)
+    axins = ax.inset_axes([0.5, 0.4, 0.5, 0.6])
+    axins.set_xlim(0.01, 0.19)
+    axins.set_ylim(0, 9.5)
+    ax.indicate_inset_zoom(axins, edgecolor="white")
+    axins.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], np.arange(10))
+plt.savefig('10x20_left_edge.pdf', bbox_inches='tight')
 
 plt.figure()
 plt.xlabel(" Lattice index ")
 plt.ylabel('$|\psi|^2$')
 plt.title('Left Edge Eigenstates of 10x20 STO Sites With non-zero Imaginary Eigenvalue')
 for j, vector in enumerate(Vec.T):
-    plt.plot(((abs(vector).reshape(m, 2*m))**2)[:, 0], label=f"State with Re(E)={np.around(EI[igens][i].real,decimals=2)}")
-plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.18), ncol=3, fancybox=True, shadow=True)
+    plt.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0],
+             label=f"State with Re(E)={np.around(EI[igens][i].real, decimals=2)}")
+plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.17), ncol=3, fancybox=True, shadow=True)
 
-plt.savefig('10x20_left_edge_line_plot.pdf')
+plt.savefig('10x20_left_edge_line_plot.pdf', bbox_inches='tight')
 
 # Eigenvectors on the right edge
 
 plt.figure()
-for i, vector in enumerate(NVec.T[:4]):
-    plt.subplot(3, 2, i + 1)
-    plt.imshow((abs(vector).reshape(m, 2 * m)) ** 2)
+for i, vector in enumerate(NVec.T):
+    ax = plt.subplot(5, 2, i + 1)
+    im = ax.imshow((abs(vector).reshape(m, 2 * m)) ** 2)
+    plt.colorbar(im)
+    axins = ax.inset_axes([0.2, 0.3, 0.5, 0.6])
+    axins.set_xlim(0.01, 0.19)
+    axins.set_ylim(0,10)
+    # ax.indicate_inset_zoom(axin2, edgecolor="white")
+    axins.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1], np.arange(10))
+    axins.tick_params(left=False,
+                    bottom=False,
+                    labelleft=True,
+                    labelbottom=True, labelsize=6)
 
-plt.savefig('10x20_right_edge.pdf')
+plt.savefig('10x20_right_edge.pdf', bbox_inches='tight')
 
 plt.figure()
 plt.xlabel(" Lattice index ")
 plt.ylabel('$|\psi|^2$')
 plt.title('Right Edge Eigenstates of 10x20 STO Sites With negavtive imaginary Eigenvalue')
 for j, vector in enumerate(NVec.T):
-    plt.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1], label='eigenvalue=' + str(np.round(EI[Nigens][j], decimals=2)))
+    plt.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1],
+             label='eigenvalue=' + str(np.round(EI[Nigens][j], decimals=2)))
 plt.legend(bbox_to_anchor=(0.65, 1.25))
 
 plt.savefig('10x20_right_edge_line_plot.pdf')
