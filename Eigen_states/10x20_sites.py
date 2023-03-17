@@ -38,8 +38,8 @@ plt.xlabel(" Lattice index ")
 plt.ylabel('$|\psi|^2$')
 plt.title('Left Edge Eigenstates of 10x20 STO Sites With non-zero Imaginary Eigenvalue')
 for j, vector in enumerate(Vec.T):
-    plt.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], label='eigenvalue=' + str(np.round(EI[igens][j], decimals=2)))
-    plt.legend(loc='best', fontsize=7)
+    plt.plot(((abs(vector).reshape(m, 2*m))**2)[:, 0], label=f"State with Re(E)={np.around(EI[igens][i].real,decimals=2)}")
+plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.18), ncol=3, fancybox=True, shadow=True)
 
 plt.savefig('10x20_left_edge_line_plot.pdf')
 
@@ -58,7 +58,7 @@ plt.ylabel('$|\psi|^2$')
 plt.title('Right Edge Eigenstates of 10x20 STO Sites With negavtive imaginary Eigenvalue')
 for j, vector in enumerate(NVec.T):
     plt.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1], label='eigenvalue=' + str(np.round(EI[Nigens][j], decimals=2)))
-    plt.legend(bbox_to_anchor=(0.65, 1.25))
+plt.legend(bbox_to_anchor=(0.65, 1.25))
 
 plt.savefig('10x20_right_edge_line_plot.pdf')
 
