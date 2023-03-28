@@ -24,36 +24,88 @@ NVec = VI[:, Nigens]
 
 # Eigenvectors on the left edge
 
-plt.figure()
+fig = plt.figure(figsize=(3.3, (2 * 3.3) / 3))
 for i, vector in enumerate(Vec.T[:4]):
-    plt.subplot(3, 2, i + 1)
-    plt.imshow((abs(vector).reshape(m, 2 * m)) ** 2)
+    ax = plt.subplot(3, 2, i + 1)
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False) if i == 0 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False) if i == 1 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True) if i == 3 else 0
+    ax.set_yticks(np.arange(0, 50, 20))
+    ax.set_ylabel("$|\psi|^2$") if i % 2 == 0 else 0
+    ax.set_xlabel("Site no.") if i == 2 else 0
+    ax.set_xlabel("Site no.") if i == 3 else 0
+    ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0])
 
 plt.savefig('50x100_left_edge.pdf')
 
-fig = plt.figure()
-plt.xlabel(" Lattice index ")
-plt.ylabel('$|\psi|^2$')
-plt.title('Left Edge Eigenstates of 50x100 STO Sites With non-zero Imaginary Eigenvalue')
-for i, vector in enumerate(Vec.T[:5]):
-    plt.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0])
-
-plt.savefig('50x100_left_edge_line_plot.pdf')
-
 # Eigenvectors on the right edge
-plt.figure()
+fig = plt.figure(figsize=(3.3, (2 * 3.3) / 3))
 for i, vector in enumerate(NVec.T[:4]):
-    plt.subplot(3, 2, i + 1)
-    plt.imshow((abs(vector).reshape(m, 2 * m)) ** 2)
+    ax = plt.subplot(3, 2, i + 1)
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False) if i == 0 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False) if i == 1 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True) if i == 3 else 0
+    ax.set_ylabel("$|\psi|^2$") if i % 2 == 0 else 0
+    ax.set_xlabel("Site no.") if i == 2 else 0
+    ax.set_xlabel("Site no.") if i == 3 else 0
+    ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1])
 
 plt.savefig('50x100_right_edge.pdf')
 
+# Eigenvectors on the left edge first 10
+fig = plt.figure(figsize=(3.3, (5*3.3)/3))
+colors = ['blue', 'orange', 'red', 'green', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
+for i, vector in enumerate(Vec.T[:10]):
+    ax = plt.subplot(5, 2, i + 1)
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False, labelsize=6) if i in list(
+        np.arange(8)[::2]) else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False, labelsize=6) if i in list(
+        np.arange(8)[1::2]) else 0
+    ax.set_ylabel("$|\psi|^2$") if i in list(np.arange(10)[::2]) else 0
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True, labelsize=6) if i == 8 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True, labelsize=6) if i == 9 else 0
+    ax.set_xlabel("Site no.") if i == 8 else 0
+    ax.set_xlabel("Site no.") if i == 9 else 0
+    ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], c=colors[i],
+            label=f"{np.around(EI[igens][i].real, decimals=2)}")
+fig.legend(title=f"Re(E)", bbox_to_anchor=(0.95, 1.015), ncol = 4)
 
-fig = plt.figure()
+plt.savefig('50x100_left_edge_10.pdf')
+
+
+# Eigenvectors on the right edge first 10
+fig = plt.figure(figsize=(3.3, (5*3.3)/3))
+colors = ['blue', 'orange', 'red', 'green', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
+for i, vector in enumerate(NVec.T[:10]):
+    ax = plt.subplot(5, 2, i + 1)
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False, labelsize=6) if i in list(
+        np.arange(8)[::2]) else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False, labelsize=6) if i in list(
+        np.arange(8)[1::2]) else 0
+    ax.set_ylabel("$|\psi|^2$") if i in list(np.arange(10)[::2]) else 0
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True, labelsize=6) if i == 8 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True, labelsize=6) if i == 9 else 0
+    ax.set_xlabel("Site no.") if i == 8 else 0
+    ax.set_xlabel("Site no.") if i == 9 else 0
+    ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1], c=colors[i],
+            label=f"{np.around(EI[Nigens][i].real, decimals=2)}")
+fig.legend(title=f"Re(E)", bbox_to_anchor=(0.95, 1.015), ncol = 4)
+
+plt.savefig('50x100_right_edge_10.pdf')
+
+
+fig = plt.figure(figsize=(3.3, (3 * 3.3) / 3))
 plt.xlabel(" Lattice index ")
 plt.ylabel('$|\psi|^2$')
-plt.title('Right Edge Eigenstates of 50x100 STO Sites With non-zero Imaginary Eigenvalue')
-for i, vector in enumerate(NVec.T[:5]):
+for i, vector in enumerate(Vec.T[:10]):
+    plt.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0])
+
+plt.savefig('50x100_Left_edge_line_plot.pdf')
+
+fig = plt.figure(figsize=(3.3, (2 * 3.3) / 3))
+plt.xlabel(" Lattice index ")
+plt.ylabel('$|\psi|^2$')
+for i, vector in enumerate(NVec.T[:10]):
     plt.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1])
 
 plt.savefig('50x100_right_edge_line_plot.pdf')

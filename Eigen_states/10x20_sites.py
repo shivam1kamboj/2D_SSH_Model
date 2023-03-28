@@ -26,32 +26,47 @@ NVec = VI[:, Nigens]
 
 # Eigenvectors on the left edge
 
-plt.figure()
-for i, vector in enumerate(Vec.T[:4]):
-    ax = plt.subplot(3, 2, i + 1)
-    im = ax.imshow((abs(vector).reshape(m, 2 * m)) ** 2)
-    plt.colorbar(im)
-    axins = ax.inset_axes([0.5, 0.4, 0.5, 0.6])
-    axins.set_xlim(0.01, 0.19)
-    axins.set_ylim(0, 9.5)
-    ax.indicate_inset_zoom(axins, edgecolor="white")
-    axins.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], np.arange(10))
+fig = plt.figure(figsize=(3.3, (2*3.3)/3))
+for i,vector in enumerate(Vec.T[:4]):
+    ax = plt.subplot(3,2,i+1)
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False) if i == 0 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False) if i == 1 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True) if i == 3 else 0
+    ax.set_yticks(np.arange(0, 10, 4))
+    ax.set_ylabel("Site no.") if i % 2 == 0 else 0
+    ax.set_xlabel("Site no.") if i == 2 else 0
+    ax.set_xlabel("Site no.") if i == 3 else 0
+    im = ax.imshow((abs(vector).reshape(m,2*m))**2, cmap = 'Greys')
+#     plt.colorbar(im) if i%2!=0 else 0
+    axins = ax.inset_axes([0.5,0.4,0.5,0.6])
+    axins.set_xlim(0.01,0.19)
+    axins.set_ylim(0,9.5)
+    # axins.set_ylabel('Site No.', fontsize = 6)
+    axins.set_xlabel("$|\psi|^2$", fontsize = 6)
+#     ax.indicate_inset_zoom(axins, edgecolor="black",lw =3)
+    axins.tick_params(labelbottom=False, labelsize=6)
+    axins.plot(((abs(vector).reshape(m, 2*m))**2)[:, 0], np.arange(10))
+
+fig.subplots_adjust(right=0.8)
+cbar_ax = fig.add_axes([0.83, 0.38, 0.02, 0.5])
+fig.colorbar(im, cax=cbar_ax)
+cbar_ax.set_title('$|\psi|^2$')
 plt.savefig('10x20_left_edge.pdf', bbox_inches='tight')
 
-plt.figure()
-plt.xlabel(" Lattice index ")
-plt.ylabel('$|\psi|^2$')
-plt.title('Left Edge Eigenstates of 10x20 STO Sites With non-zero Imaginary Eigenvalue')
+plt.figure(figsize=(3.3, (2*3.3)/3))
+plt.xlabel(" Site no. ", fontsize = 11)
+plt.ylabel('$|\psi|^2$', fontsize = 11)
+plt.tick_params(labelsize=9)
+# plt.title('Left Edge Eigenstates of 10x20 STO Sites With non-zero Imaginary Eigenvalue')
 for j, vector in enumerate(Vec.T):
     plt.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0],
-             label=f"State with Re(E)={np.around(EI[igens][i].real, decimals=2)}")
-plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.17), ncol=3, fancybox=True, shadow=True)
-
+             label=f"{np.around(EI[igens][j].real, decimals=2)}")
+plt.legend(title = "Re(E)", bbox_to_anchor=(1, 1.02), fontsize = 7.5)
 plt.savefig('10x20_left_edge_line_plot.pdf', bbox_inches='tight')
 
 # Eigenvectors on the right edge
 
-plt.figure()
+fig = plt.figure(figsize=(3.3, (2*3.3)/3))
 for i, vector in enumerate(NVec.T):
     ax = plt.subplot(5, 2, i + 1)
     im = ax.imshow((abs(vector).reshape(m, 2 * m)) ** 2)
@@ -61,10 +76,7 @@ for i, vector in enumerate(NVec.T):
     axins.set_ylim(0,10)
     # ax.indicate_inset_zoom(axin2, edgecolor="white")
     axins.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1], np.arange(10))
-    axins.tick_params(left=False,
-                    bottom=False,
-                    labelleft=True,
-                    labelbottom=True, labelsize=6)
+    axins.tick_params(left=False, bottom=False, labelleft=True, labelbottom=True, labelsize=6)
 
 plt.savefig('10x20_right_edge.pdf', bbox_inches='tight')
 
@@ -90,3 +102,23 @@ for i in range(4):
     plt.legend(loc='best')
     Real_E_edge = np.zeros(4)
 plt.savefig('10x20_E[Re]_first_4_left.pdf')
+
+
+fig = plt.figure(figsize=(3.3, (5*3.3)/3))
+colors = ['blue', 'orange', 'red', 'green', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
+for i, vector in enumerate(Vec.T):
+    ax = plt.subplot(5, 2, i + 1)
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False, labelsize=6) if i in list(
+        np.arange(8)[::2]) else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False, labelsize=6) if i in list(
+        np.arange(8)[1::2]) else 0
+    ax.set_ylabel("$|\psi|^2$") if i in list(np.arange(10)[::2]) else 0
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True, labelsize=6) if i == 8 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True, labelsize=6) if i == 9 else 0
+    ax.set_xlabel("Site no.") if i == 8 else 0
+    ax.set_xlabel("Site no.") if i == 9 else 0
+    ax.plot(np.arange(10), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], c=colors[i],
+            label=f"{np.around(EI[igens][i].real, decimals=2)}")
+fig.legend(title=f"Re(E)", bbox_to_anchor=(0.95, 1.015), ncol = 4)
+
+plt.savefig('10x10_left_edge_10.pdf')
