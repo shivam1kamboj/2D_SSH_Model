@@ -51,6 +51,7 @@ fig.subplots_adjust(right=0.8)
 cbar_ax = fig.add_axes([0.83, 0.38, 0.02, 0.5])
 fig.colorbar(im, cax=cbar_ax)
 cbar_ax.set_title('$|\psi|^2$')
+
 plt.savefig('10x20_left_edge.pdf', bbox_inches='tight')
 
 plt.figure(figsize=(3.3, (2*3.3)/3))
@@ -119,6 +120,36 @@ for i, vector in enumerate(Vec.T):
     ax.set_xlabel("Site no.") if i == 9 else 0
     ax.plot(np.arange(10), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], c=colors[i],
             label=f"{np.around(EI[igens][i].real, decimals=2)}")
-fig.legend(title=f"Re(E)", bbox_to_anchor=(0.92, 0.98), ncol = 5, fontsize = 6)
-
+fig.legend(title=f"Re(E)", bbox_to_anchor=(0.98, 1.08), ncol = 5, fontsize = 6)
+fig.tight_layout()
 plt.savefig('10x10_left_edge_10.pdf', bbox_inches='tight')
+
+
+labels = []
+fig = plt.figure(figsize=(6.4, (2*3.3)/3))
+colors = ['blue', 'orange', 'red', 'green', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
+for i, vector in enumerate(Vec.T):
+    ax = plt.subplot(2, 5, i + 1)
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False) if i in list(np.arange(1, 5)) else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True) if i in list(np.arange(6, 10)) else 0
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False) if i == 0 else 0
+    ax.set_yticks(np.arange(0, 10, 4))
+    ax.set_ylabel("Site no.") if i in [0, 5] else 0
+    ax.set_xlabel("Site no.") if i in [5, 6, 7, 8,  9] else 0
+    im = plt.imshow((abs(vector).reshape(m, 2 * m)) ** 2, cmap='Greys')
+    clb = plt.colorbar(im) if i == 9 else 0
+    clb.ax.set_title('$|\psi|^2$') if i ==9 else 0
+    axins = ax.inset_axes([0.5, 0.4, 0.5, 0.6])
+    axins.set_xlim(0.01, 0.19)
+    axins.set_ylim(0, 9.5)
+    # axins.set_ylabel('Site No.', fontsize = 6)
+    axins.set_xlabel("$|\psi|^2$", fontsize=6)
+    #     ax.indicate_inset_zoom(axins, edgecolor="black",lw =3)
+    axins.tick_params(labelbottom=False, labelsize=6)
+    label, = axins.plot(((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], np.arange(10), color = colors[i])
+    labels.append(label)
+fig.legend(labels, list(np.around(EI[igens], decimals = 2).real), title=f"Re(E)", bbox_to_anchor=(0.96, 1.08),
+           ncol = 10, fontsize = 6.5)
+
+fig.tight_layout()
+plt.savefig('left_edge_10_01.pdf', bbox_inches='tight')

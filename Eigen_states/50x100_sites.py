@@ -73,8 +73,8 @@ for i, vector in enumerate(Vec.T[:10]):
     ax.set_xlabel("Site no.") if i == 9 else 0
     ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], c=colors[i],
             label=f"{np.around(EI[igens][i].real, decimals=2)}")
-fig.legend(title=f"Re(E)", bbox_to_anchor=(0.92, 0.98), ncol = 5, fontsize = 6)
-
+fig.legend(title=f"Re(E)", bbox_to_anchor=(0.98, 1.08), ncol = 5, fontsize = 6)
+fig.tight_layout()
 plt.savefig('50x100_left_edge_10.pdf', bbox_inches='tight')
 
 
@@ -96,8 +96,8 @@ for i, vector in enumerate(NVec.T[:10]):
     ax.set_xlabel("Site no.") if i == 9 else 0
     ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1], c=colors[i],
             label=f"{np.around(EI[Nigens][i].real, decimals=2)}")
-fig.legend(title=f"Re(E)", bbox_to_anchor=(0.92, 0.98), ncol = 5, fontsize = 6)
-
+fig.legend(title=f"Re(E)", bbox_to_anchor=(0.98, 1.08), ncol = 5, fontsize = 6)
+fig.tight_layout()
 plt.savefig('50x100_right_edge_10.pdf', bbox_inches='tight')
 
 
