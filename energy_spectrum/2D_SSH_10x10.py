@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 plt.style.use('/Users/shivamkamboj/Documents/UC_Merced/Research/2D_SSH_full_project/matplotlibrc')
 
-fig2 = plt.figure(figsize=(3.3, (2*3.3)/3))
+fig = plt.figure(figsize=(3.3, (2*3.3)/3))
 
 plt.subplot(2, 2, 1)
 m, n, t, J2 = 10, 10, 1, 0.01
@@ -45,4 +45,5 @@ plt.xlabel(r"""$J/\~J$""")
 plt.plot(j0, Imaginary_energy_10)
 plt.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True)
 
+fig.tight_layout()
 plt.savefig('2D_SSH_10x10.pdf', bbox_inches='tight')

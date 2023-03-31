@@ -103,22 +103,22 @@ for i in range(4):
     Real_E_edge = np.zeros(4)
 plt.savefig('10x20_E[Re]_first_4_left.pdf')
 
-
+plt.rcParams["font.size"] = "7"
 fig = plt.figure(figsize=(3.3, (5*3.3)/3))
 colors = ['blue', 'orange', 'red', 'green', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
 for i, vector in enumerate(Vec.T):
     ax = plt.subplot(5, 2, i + 1)
-    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False, labelsize=6) if i in list(
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False) if i in list(
         np.arange(8)[::2]) else 0
-    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False, labelsize=6) if i in list(
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False) if i in list(
         np.arange(8)[1::2]) else 0
     ax.set_ylabel("$|\psi|^2$") if i in list(np.arange(10)[::2]) else 0
-    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True, labelsize=6) if i == 8 else 0
-    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True, labelsize=6) if i == 9 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True) if i == 8 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True) if i == 9 else 0
     ax.set_xlabel("Site no.") if i == 8 else 0
     ax.set_xlabel("Site no.") if i == 9 else 0
     ax.plot(np.arange(10), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], c=colors[i],
             label=f"{np.around(EI[igens][i].real, decimals=2)}")
-fig.legend(title=f"Re(E)", bbox_to_anchor=(0.95, 1.015), ncol = 4)
+fig.legend(title=f"Re(E)", bbox_to_anchor=(0.92, 0.98), ncol = 5, fontsize = 6)
 
-plt.savefig('10x10_left_edge_10.pdf')
+plt.savefig('10x10_left_edge_10.pdf', bbox_inches='tight')

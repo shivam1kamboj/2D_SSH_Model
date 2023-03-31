@@ -30,13 +30,14 @@ for i, vector in enumerate(Vec.T[:4]):
     ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False) if i == 0 else 0
     ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False) if i == 1 else 0
     ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True) if i == 3 else 0
-    ax.set_yticks(np.arange(0, 50, 20))
+    ax.set_xticks(np.arange(0, 50, 20))
+    ax.set_yticks(np.arange(0, 0.04, 0.01))
     ax.set_ylabel("$|\psi|^2$") if i % 2 == 0 else 0
     ax.set_xlabel("Site no.") if i == 2 else 0
     ax.set_xlabel("Site no.") if i == 3 else 0
     ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0])
 
-plt.savefig('50x100_left_edge.pdf')
+plt.savefig('50x100_left_edge.pdf', bbox_inches='tight')
 
 # Eigenvectors on the right edge
 fig = plt.figure(figsize=(3.3, (2 * 3.3) / 3))
@@ -45,32 +46,36 @@ for i, vector in enumerate(NVec.T[:4]):
     ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False) if i == 0 else 0
     ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False) if i == 1 else 0
     ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True) if i == 3 else 0
+    ax.set_xticks(np.arange(0, 50, 20))
+    ax.set_yticks(np.arange(0, 0.04, 0.01))
     ax.set_ylabel("$|\psi|^2$") if i % 2 == 0 else 0
     ax.set_xlabel("Site no.") if i == 2 else 0
     ax.set_xlabel("Site no.") if i == 3 else 0
     ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1])
 
-plt.savefig('50x100_right_edge.pdf')
+plt.savefig('50x100_right_edge.pdf', bbox_inches='tight')
 
 # Eigenvectors on the left edge first 10
 fig = plt.figure(figsize=(3.3, (5*3.3)/3))
 colors = ['blue', 'orange', 'red', 'green', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
 for i, vector in enumerate(Vec.T[:10]):
     ax = plt.subplot(5, 2, i + 1)
-    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False, labelsize=6) if i in list(
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False) if i in list(
         np.arange(8)[::2]) else 0
-    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False, labelsize=6) if i in list(
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False) if i in list(
         np.arange(8)[1::2]) else 0
     ax.set_ylabel("$|\psi|^2$") if i in list(np.arange(10)[::2]) else 0
-    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True, labelsize=6) if i == 8 else 0
-    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True, labelsize=6) if i == 9 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True) if i == 8 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True) if i == 9 else 0
+    ax.set_xticks(np.arange(0, 50, 20))
+    ax.set_yticks(np.arange(0, 0.04, 0.01))
     ax.set_xlabel("Site no.") if i == 8 else 0
     ax.set_xlabel("Site no.") if i == 9 else 0
     ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], c=colors[i],
             label=f"{np.around(EI[igens][i].real, decimals=2)}")
-fig.legend(title=f"Re(E)", bbox_to_anchor=(0.95, 1.015), ncol = 4)
+fig.legend(title=f"Re(E)", bbox_to_anchor=(0.92, 0.98), ncol = 5, fontsize = 6)
 
-plt.savefig('50x100_left_edge_10.pdf')
+plt.savefig('50x100_left_edge_10.pdf', bbox_inches='tight')
 
 
 # Eigenvectors on the right edge first 10
@@ -78,20 +83,22 @@ fig = plt.figure(figsize=(3.3, (5*3.3)/3))
 colors = ['blue', 'orange', 'red', 'green', 'purple', 'brown', 'pink', 'gray', 'olive', 'cyan']
 for i, vector in enumerate(NVec.T[:10]):
     ax = plt.subplot(5, 2, i + 1)
-    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False, labelsize=6) if i in list(
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False) if i in list(
         np.arange(8)[::2]) else 0
-    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False, labelsize=6) if i in list(
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False) if i in list(
         np.arange(8)[1::2]) else 0
     ax.set_ylabel("$|\psi|^2$") if i in list(np.arange(10)[::2]) else 0
-    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True, labelsize=6) if i == 8 else 0
-    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True, labelsize=6) if i == 9 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True) if i == 8 else 0
+    ax.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True) if i == 9 else 0
+    ax.set_xticks(np.arange(0, 50, 20))
+    ax.set_yticks(np.arange(0, 0.04, 0.01))
     ax.set_xlabel("Site no.") if i == 8 else 0
     ax.set_xlabel("Site no.") if i == 9 else 0
     ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, -1], c=colors[i],
             label=f"{np.around(EI[Nigens][i].real, decimals=2)}")
-fig.legend(title=f"Re(E)", bbox_to_anchor=(0.95, 1.015), ncol = 4)
+fig.legend(title=f"Re(E)", bbox_to_anchor=(0.92, 0.98), ncol = 5, fontsize = 6)
 
-plt.savefig('50x100_right_edge_10.pdf')
+plt.savefig('50x100_right_edge_10.pdf', bbox_inches='tight')
 
 
 fig = plt.figure(figsize=(3.3, (3 * 3.3) / 3))
