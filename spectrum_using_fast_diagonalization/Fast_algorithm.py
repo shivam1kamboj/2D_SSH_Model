@@ -4,6 +4,10 @@ import numpy as np
 
 
 def H_matrix_eigens(h, N):
+
+    """This function takes input matrix h in the form of Block tridiagonal matrix
+    and is specific to only this type of matrix"""
+
     row, column = h.shape
     L = int(column // N)  # L is size of block and N is number of rows
 
