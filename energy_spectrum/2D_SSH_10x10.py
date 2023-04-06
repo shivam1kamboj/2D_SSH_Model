@@ -17,6 +17,7 @@ Imaginary_energy_01 = np.sort(Eigenvalues.imag)  # Im (E) with 1% vertical coupl
 plt.ylabel('Re(E) [arb. units]')
 plt.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False)
 plt.plot(j0, Real_energy)
+plt.text(0.012, 0.02, r'(a)')
 
 
 plt.subplot(2, 2, 2)
@@ -28,6 +29,7 @@ Real_energy = np.sort(Eigenvalues.real)
 Imaginary_energy_10 = np.sort(Eigenvalues.imag)  # Im (E) with 10% vertical coupling
 plt.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False)
 plt.plot(j0, Real_energy)
+plt.text(0.012, 0.04, r'(b)')
 
 
 plt.subplot(2, 2, 3)
@@ -36,6 +38,7 @@ plt.xlabel(r"""$J/\~J$""")
 plt.ylabel('Im(E) [arb. units]')
 
 plt.plot(j0, Imaginary_energy_01)
+plt.text(0.012, 0.02, r'(c)')
 
 
 plt.subplot(2, 2, 4)
@@ -43,6 +46,7 @@ plt.subplot(2, 2, 4)
 plt.xlabel(r"""$J/\~J$""")
 
 plt.plot(j0, Imaginary_energy_10)
+plt.text(0.012, 0.02, r'(d)')
 plt.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True)
 
 fig.tight_layout()
