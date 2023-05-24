@@ -7,7 +7,7 @@ plt.style.use('/Users/shivamkamboj/Documents/UC_Merced/Research/2D_SSH_full_proj
 j0 = np.linspace(-2, 2, 50)
 t = 1
 m, n, w = 10, 10, 1  # with a STO array of size 50 X50, H-matrix would be 5000 X 5000 dimensions
-a, b, l = 0.2, 0, 0.1
+a, b, l = 0.2, 0, 0.1 # a is J_SA , b is J_SB and l is alpha
 J2, J = 0.1, 0.2
 HH = Hamiltonian_2DSSH(t, J, J2, m, n, w, a, b, l)
 EI, VI = np.linalg.eig(HH)
