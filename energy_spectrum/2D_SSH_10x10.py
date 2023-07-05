@@ -14,10 +14,10 @@ Eigenvalues = np.array([(np.linalg.eigvals(Hamiltonian_2DSSH(t, J, J2, m, n, w=1
 Real_energy = np.sort(Eigenvalues.real)
 Imaginary_energy_01 = np.sort(Eigenvalues.imag)  # Im (E) with 1% vertical coupling
 
-plt.ylabel('Re(E) [arb. units]')
+plt.ylabel('Re(E) - $\omega$\n [arb. units]')
 plt.tick_params(left=True, bottom=True, labelleft=True, labelbottom=False)
-plt.plot(j0, Real_energy)
-plt.text(-0.4, 4.7, r'(a)')
+plt.plot(j0, Real_energy - 1)
+plt.text(-1.8, 3.9, r'(a)')
 
 
 plt.subplot(2, 2, 2)
@@ -28,17 +28,18 @@ Eigenvalues = np.array([(np.linalg.eigvals(Hamiltonian_2DSSH(t, J, J2, m, n, w=1
 Real_energy = np.sort(Eigenvalues.real)
 Imaginary_energy_10 = np.sort(Eigenvalues.imag)  # Im (E) with 10% vertical coupling
 plt.tick_params(left=True, bottom=True, labelleft=False, labelbottom=False)
-plt.plot(j0, Real_energy)
-plt.text(-0.4, 4.7, r'(b)')
+plt.plot(j0, Real_energy - 1)
+plt.text(-1.8, 4, r'(b)')
 
 
 plt.subplot(2, 2, 3)
 
 plt.xlabel(r"""$J/\~J$""")
-plt.ylabel('Im(E) [arb. units]')
+plt.ylabel('Im(E)\n [arb. units]')
 
 plt.plot(j0, Imaginary_energy_01)
-plt.text(-0.4, 0.12, r'(c)')
+plt.text(-1.8, 0.06, r'(c)')
+plt.xticks(np.arange(-2, 3, 1.0))
 
 
 plt.subplot(2, 2, 4)
@@ -46,8 +47,9 @@ plt.subplot(2, 2, 4)
 plt.xlabel(r"""$J/\~J$""")
 
 plt.plot(j0, Imaginary_energy_10)
-plt.text(-0.4, 0.12, r'(d)')
+plt.text(-1.8, 0.06, r'(d)')
 plt.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True)
+plt.xticks(np.arange(-2, 3, 1.0))
 
 fig.tight_layout()
 plt.savefig('2D_SSH_10x10.pdf', bbox_inches='tight')
