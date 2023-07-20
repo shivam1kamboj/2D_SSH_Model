@@ -136,6 +136,6 @@ for i, vector in enumerate(Vec.T[25:35]):
     ax.set_xlabel("Site no.") if i == 9 else 0
     ax.plot(np.arange(50), ((abs(vector).reshape(m, 2 * m)) ** 2)[:, 0], c=colors[i],
             label=f"{np.around(10 * (sorted_EI[igens][25:35][i].real - 1), decimals=2)}")
-fig.legend(title="$Re(E -\omega)$ $x$ $10^{-1}$", bbox_to_anchor=(0.96, 1.08), ncol=5, fontsize=6)
+fig.legend(title="Re($E$) -$\omega$ $x$ $10^{-1}$", bbox_to_anchor=(0.96, 1.08), ncol=5, fontsize=6)
 fig.tight_layout()
 plt.savefig('50x100_left_35.pdf', bbox_inches='tight')
