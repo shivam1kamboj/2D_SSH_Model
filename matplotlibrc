@@ -12,8 +12,8 @@ font.serif : Times New Roman
 
 axes.linewidth : 0.75
 
-lines.linewidth : 0.75
-lines.markersize : 3.0
+lines.linewidth : 0.2
+lines.markersize : 3
 lines.markeredgewidth : 0.5
 figure.dpi : 500
 

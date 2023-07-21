@@ -9,7 +9,7 @@ fig = plt.figure(figsize=(6.4, (2 * 3.3)/3))
 
 plt.subplot(2, 4, 1)
 m, n, t, J2 = 10, 10, 1, 0.01
-j0 = np.linspace(-2, 2, 50)  # linear space of v values
+j0 = np.linspace(-2, 2, 200)  # linear space of v values
 
 Eigenvalues = np.array([(np.linalg.eigvals(Hamiltonian_2DSSH(t, J, J2, m, n, w=1, a=0.2, b=0, l=0.1))) for J in j0])
 Real_energy = np.sort(Eigenvalues.real)
@@ -33,13 +33,13 @@ plt.plot(j0, Real_energy - 1)
 plt.text(-1.8, 4, r'(b)')
 
 # Larger system 50x100
-j0 = np.linspace(-2, 2, 50)
+j0 = np.linspace(-2, 2, 200)
 
 t, m, n, w = 1, 50, 50, 1  # with a STO array of size 50 X100, H-matrix would be 5000 X 5000 dimensions
 a, b, l = 0.2, 0, 0.1
 J2 = 0.01
 
-EIGENS_01 = np.empty((50, m * n * 2), complex)
+EIGENS_01 = np.empty((200, m * n * 2), complex)
 for i, j in enumerate(j0):
     hh = Hamiltonian_2DSSH(t, j, J2, m, n, w, a, b, l)
     EIGENS_01[i] = H_matrix_eigens(hh, m)
@@ -52,7 +52,7 @@ plt.text(-1.8, 4, r'(c)')
 
 J2 = 0.1 #10% vertical coupling
 
-EIGENS_10 = np.empty((50, m * n * 2), complex)
+EIGENS_10 = np.empty((200, m * n * 2), complex)
 for i, j in enumerate(j0):
     hh = Hamiltonian_2DSSH(t, j, J2, m, n, w, a, b, l)
     EIGENS_10[i] = H_matrix_eigens(hh, m)
@@ -96,4 +96,4 @@ plt.plot(j0, np.sort(EIGENS_10.imag))
 plt.tick_params(left=True, bottom=True, labelleft=False, labelbottom=True)
 plt.xticks(np.arange(-2, 3, 1.0))
 
-plt.savefig('2D_SSH_50x100.pdf', bbox_inches='tight')
+plt.savefig('50x100.pdf', bbox_inches='tight')
